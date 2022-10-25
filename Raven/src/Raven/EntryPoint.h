@@ -6,6 +6,10 @@ extern Raven::Application* Raven::CreateApplication();
 
 int main(int argc, char** argv)
 {
+	Raven::Log::Init();
+	RV_CORE_WARN("Initialized Core Log!");
+	RV_INFO("Initialized Client Log!");
+
 	printf("is working\n");
 	auto app = Raven::CreateApplication();
 	app->Run();
