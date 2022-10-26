@@ -24,15 +24,15 @@ project "Raven"
 		"%{prj.name}/src/**.cpp"
 	}
 
-	include
+	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include;"
+		"%{prj.name}/vendor/spdlog/include"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
+		cppdialect "C++latest"
 		staticruntime "On"
-		sytemversion "10.0"
+		systemversion "latest"
 
 		defines
 		{
@@ -42,18 +42,18 @@ project "Raven"
 
 		postbuildcommands
 		{
-			{"{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"}
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
-	filter "configurations::Debug"
+	filter "configurations:Debug"
 		defines "RV_DEBUG"
 		symbols "On"
 
-	filter "configurations::Release"
+	filter "configurations:Release"
 		defines "RV_RELEASE"
 		optimize "On"
 
-	filter "configurations::Dist"
+	filter "configurations:Dist"
 		defines "RV_DIST"
 		optimize "On"
 
@@ -71,9 +71,9 @@ project "Sandbox"
 		"%{prj.name}/src/**.cpp"
 	}
 
-	include
+	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include;"
+		"Raven/vendor/spdlog/include",
 		"Raven/src"
 	}
 
@@ -83,23 +83,23 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
+		cppdialect "C++latest"
 		staticruntime "On"
-		sytemversion "10.0"
+		systemversion "latest"
 
 		defines
 		{
-			"RV_PLATFORM_WINDOWS",
+			"RV_PLATFORM_WINDOWS"
 		}
 
-	filter "configurations::Debug"
+	filter "configurations:Debug"
 		defines "RV_DEBUG"
 		symbols "On"
 
-	filter "configurations::Release"
+	filter "configurations:Release"
 		defines "RV_RELEASE"
 		optimize "On"
 
-	filter "configurations::Dist"
+	filter "configurations:Dist"
 		defines "RV_DIST"
 		optimize "On"
