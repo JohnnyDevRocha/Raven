@@ -4,6 +4,9 @@
     <Filter Include="Raven">
       <UniqueIdentifier>{A10D020E-0D22-2ABF-D6A3-CD1E427726F0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Raven\Events">
+      <UniqueIdentifier>{65FA6DB0-515D-FD54-FAE2-350BE624C9D7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Raven.h" />
@@ -16,9 +19,15 @@
     <ClInclude Include="src\Raven\EntryPoint.h">
       <Filter>Raven</Filter>
     </ClInclude>
+    <ClInclude Include="src\Raven\Events\Event.h">
+      <Filter>Raven\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Raven\Log.h">
       <Filter>Raven</Filter>
     </ClInclude>
+    <ClInclude Include="src\Raven\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\Raven\Events\KeyEvent.h" />
+    <ClInclude Include="src\Raven\Events\MouseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Raven\Application.cpp">
