@@ -2,34 +2,41 @@
 
 #include "Event.h"
 
+#include <sstream>
+
 namespace Raven {
 
-	class KeyEvent : public Event
+	class RAVEN_API KeyEvent : public Event
 	{
 	public:
+		inline int GetKeyCode() const { return m_KeyCode; }
 
+		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
+		KeyEvent(int KeyCode)
+			: m_KeyCode(KeyCode) {}
 
+		int m_KeyCode;
 	};
 
-	class KeyPressedEvent : public KeyEvent
+	class RAVEN_API KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(const KeyCode keycode, bool isRepeat = false)
-			: KeyEvent(keycode), m_IsRepeat(isRepeat) {}
+		KeyPressedEvent(int KeyCode, int repeatCount)
+			: KeyEvent(KeyCode), m_RepeatCount(repeatCount) {}
 
-		bool IsRepeat() const { return m_IsRepeat; }
+		inline int GetRepeatCount() const { return m_RepeatCount;  }
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressedEvent: " << m_KeyCode << " (repeat = " << m_IsRepeat << ")";
+			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
 			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(KeyPressed)
 	private:
-		bool m_IsRepeat;
+		int m_RepeatCount;
 	};
 
 	class KeyReleasedEvent : public KeyEvent
@@ -48,11 +55,11 @@ namespace Raven {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class KeyTypedEvent : public KeyEvent
+	class  RAVEN_API KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(const KeyCode keycode)
-			: KeyEvent(keycode) {}
+		KeyTypedEvent(int KeyCode)
+			: KeyEvent(KeyCode) {}
 
 		std::string ToString() const override
 		{
